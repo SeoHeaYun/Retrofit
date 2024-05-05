@@ -5,13 +5,14 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.net.NetworkInterface
 import java.util.concurrent.TimeUnit
 
 // api-retrogit-gson 연결
 
 object NetWorkClient {
 
-    private const val DATA_URL = "https://dapi.kakao.com/v2/search/image"
+    private const val DATA_URL = "https://dapi.kakao.com/v2/" // baseUrl(End-Point)
 
     // OkHttp
     private fun createOkHttpClient(): OkHttpClient {
@@ -31,13 +32,14 @@ object NetWorkClient {
     }
 
     // retrofit & GSON converter
-    private val dustRetrofit = Retrofit.Builder()
+    private val dataRetrofit = Retrofit
+            .Builder()
             .baseUrl(DATA_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(createOkHttpClient())
             .build()
 
     // interface 통해 사용할 것
-    val dataNetWork: NetworkInterface = dustRetrofit.create(NetworkInterface::class.java)
+    val networkService : kakaoAPI  = dataRetrofit.create(kakaoAPI::class.java)
 
 }

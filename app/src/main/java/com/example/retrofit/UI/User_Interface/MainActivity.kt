@@ -13,10 +13,12 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(binding.root)
-        // fragment set
+        setContentView(binding.root) // root: 현재 바인딩된 레이아웃의 루트 뷰(최상위 뷰)
+
         initFragment()
     }
+
+
 
 
     private fun initFragment() {
@@ -35,7 +37,6 @@ class MainActivity : AppCompatActivity() {
                        replaceFragment(StoreFragment())
                         true
                     }
-
                     else -> false
                 }
 
