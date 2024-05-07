@@ -1,11 +1,17 @@
 package com.example.retrofit.Data.network
 
 import com.example.retrofit.BuildConfig
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import com.google.gson.internal.bind.util.ISO8601Utils
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.net.NetworkInterface
+import java.sql.Time
+import java.text.SimpleDateFormat
+import java.util.Locale
 import java.util.concurrent.TimeUnit
 
 // api-retrogit-gson 연결
@@ -32,14 +38,19 @@ object NetWorkClient {
     }
 
     // retrofit & GSON converter
+        // datetime 포맷 변경
+    private val gson : Gson = GsonBuilder()
+        .setDateFormat("yyyy-MM-dd HH:mm:ss")
+        .create()
+
     private val dataRetrofit = Retrofit
             .Builder()
             .baseUrl(DATA_URL)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .client(createOkHttpClient())
             .build()
 
-    // interface 통해 사용할 것
+    // Service: client(레트로핏)와 interface(요청) 연결
     val networkService : kakaoAPI  = dataRetrofit.create(kakaoAPI::class.java)
 
 }
