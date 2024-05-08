@@ -6,17 +6,16 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.retrofit.Data.entity.Document
-import com.example.retrofit.databinding.ItemRecyclerviewBinding
+import com.example.retrofit.databinding.SearchRecyclerviewBinding
 
 class SearchAdapter(
     private var usingItem: List<Document>,
-    private val onclick: (Document) -> Unit // Document 타입의 매개변수, 반환값 Unit(void)
+    private val onclick: (Document) -> Unit// Document 타입의 매개변수, 반환값 Unit(void)
 ) : RecyclerView.Adapter<SearchAdapter.ItemViewHolder>() {
 
 
     class ItemViewHolder(
-        var binding: ItemRecyclerviewBinding,
-        val onclick: (Document) -> Unit
+        var binding: SearchRecyclerviewBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: Document) {
@@ -36,15 +35,15 @@ class SearchAdapter(
         viewType: Int
     ): ItemViewHolder {
         val binding =
-            ItemRecyclerviewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ItemViewHolder(binding, onclick)
+            SearchRecyclerviewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ItemViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val itemPosition = usingItem[position]
         holder.apply {
             bind(itemPosition)
-            holder.itemView.setOnClickListener {
+            itemView.setOnClickListener {
                 onclick(itemPosition)
                 // visible toggle & toast
                 val clickBgr = binding.clickBgr
