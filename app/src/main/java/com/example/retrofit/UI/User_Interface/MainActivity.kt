@@ -7,10 +7,14 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.ListFragment
+import com.example.retrofit.Data.entity.Document
 import com.example.retrofit.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
+
+    // stored iamge  + shared preference -> store fragment recycler view
+    val stroredImage = mutableListOf<Document>()
 
     private val TAG_SEARCH = "search_fragment"
     private val TAG_STORE = "store_fragment"
