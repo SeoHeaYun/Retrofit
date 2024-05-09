@@ -50,6 +50,10 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    // fragment
+    implementation("androidx.fragment:fragment-ktx:1.6.2")
+    // viewpager2
+    implementation("androidx.viewpager2:viewpager2:1.0.0")
     // retorofit
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")
     // gson

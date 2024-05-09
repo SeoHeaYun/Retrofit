@@ -8,28 +8,68 @@
     tools:context=".UI.User_Interface.MainActivity">
 
 
-
-    <androidx.fragment.app.FragmentContainerView
-    android:id="@+id/fragment_container_view"
-    android:layout_width="match_parent"
-    android:layout_height="0dp"
-    app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_view"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
-
-
-
-<!--Bottom Navigation-->
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation_view"
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/view_pager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tab_layout"
+      />
+
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="#8BC34A"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_navigation_menu"
-        android:background="#8BC34A"
+        app:tabGravity="fill"
+        app:tabTextColor="@color/white"
+        app:tabIndicatorGravity="bottom"
+        app:tabIndicatorHeight="5dp"
+        app:tabIndicatorFullWidth="true"
+        app:tabIndicatorColor="#00BCD4"
+        app:tabRippleColor="#4CAF50"
+        app:tabTextAppearance="@style/tabLayoutStyle"
         />
 
+
+
+
+
+
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+
+<!--fragment container view-->
+    <!--    <androidx.fragment.app.FragmentContainerView-->
+    <!--    android:id="@+id/fragment_container_view"-->
+    <!--    android:layout_width="match_parent"-->
+    <!--    android:layout_height="0dp"-->
+    <!--    app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_view"-->
+    <!--    app:layout_constraintEnd_toEndOf="parent"-->
+    <!--    app:layout_constraintStart_toStartOf="parent"-->
+    <!--    app:layout_constraintTop_toTopOf="parent" />-->
+
+
+    <!--Bottom Navigation-->
+<!--<com.google.android.material.bottomnavigation.BottomNavigationView-->
+<!--android:id="@+id/bottom_navigation_view"-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="wrap_content"-->
+<!--app:layout_constraintBottom_toBottomOf="parent"-->
+<!--app:layout_constraintEnd_toEndOf="parent"-->
+<!--app:layout_constraintStart_toStartOf="parent"-->
+<!--app:menu="@menu/bottom_navigation_menu"-->
+<!--android:background="#8BC34A" />-->

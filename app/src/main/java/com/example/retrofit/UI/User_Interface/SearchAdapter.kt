@@ -1,5 +1,6 @@
 package com.example.retrofit.UI.User_Interface
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
@@ -22,7 +23,7 @@ class SearchAdapter(
             binding.apply {
                 tvSite.text = item.display_sitename
                 tvTime.text = item.datetime
-                Glide.with(binding.root.context)// context가 들어가야 하는데, 만약 this를 쓸경우, viewBinding을 참조하게 될 것임.
+                Glide.with(root.context)// context가 들어가야 하는데, 만약 this를 쓸경우, viewBinding을 참조하게 될 것임.
                     .load(item.image_url)
                     .into(ivImage)
             }
@@ -40,13 +41,16 @@ class SearchAdapter(
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
+        // view 재활용 될때마다 초기화(position, toggle)
         val itemPosition = usingItem[position]
+        val clickBgr = holder.binding.clickBgr
+        clickBgr.isVisible = false
+
         holder.apply {
             bind(itemPosition)
             itemView.setOnClickListener {
                 onclick(itemPosition)
-                // visible toggle & toast
-                val clickBgr = binding.clickBgr
+                // visible toggle
                 clickBgr.isVisible = !clickBgr.isVisible
             }
         }
@@ -54,12 +58,15 @@ class SearchAdapter(
     }
 
     override fun getItemCount(): Int {
+        Log.d("search", "Item count: ${usingItem.size}")
+
         return usingItem.size
     }
 
     fun updateData(newData: List<Document>) {
         usingItem = newData
         notifyDataSetChanged()
+        Log.d("search", "Data updated: ${usingItem.size}")
     }
 }
 
@@ -76,5 +83,9 @@ class SearchAdapter(
 /*
 isVisible 코드의 경우, 속성값을 변경하는 것이 아니라, 속성 값 자체를 표현하는 표현식이기 때문에, true,false로 값을 넣어줘야 한다.
 clickBgr.isVisible = !clickBgr.isVisible : 가시성 토글(두 가지 옵션 사이의 전환) -> 한항이 true(false)이면 다른 항은 false(true)가 된다.ㅣ
+ */
 
+
+/*
+onBindViewHolder의 핵심은 변화하는 클릭이벤트가 재활용될 때마다 초기화되어야 하는 것. 그러기 위해서, 변수를 선언해, 변수에 실시간으로 새로운 정보가 담기도록 만들어 주어야 한다.
  */
