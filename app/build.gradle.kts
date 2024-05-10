@@ -50,6 +50,8 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    // coroutine
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9'")
     // fragment
     implementation("androidx.fragment:fragment-ktx:1.6.2")
     // viewpager2

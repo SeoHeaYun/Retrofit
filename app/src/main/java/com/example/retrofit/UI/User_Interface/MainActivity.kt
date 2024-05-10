@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.viewpager2.widget.ViewPager2
 import com.example.retrofit.Data.entity.Document
 import com.example.retrofit.databinding.ActivityMainBinding
 import com.google.android.material.tabs.TabLayoutMediator
@@ -14,19 +15,16 @@ import okhttp3.internal.notify
 class MainActivity : AppCompatActivity(), FragmentDataListner {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
 
-//    // fragmen tag
-//    private val TAG_SEARCH = "search_fragment"
-//    private val TAG_STORE = "store_fragment"
-
     // stored iamge  & shared preference
-    val storedImage = mutableListOf<Document>()
+    val selectedImage = mutableListOf<Document>()
 
     // SearchFragment -> MainActivity -> StoreFragment
     override fun onDataReceived(item: Document) {
-        storedImage.add(item)
-        Log.d("store","2단계: main에서 store로 아이템 전달: ${storedImage.size}")
-        StoreFragment.newInstance(storedImage) //  1)
+        selectedImage.add(item)
+        //StoreFragment.newInstance(storedImage) //  1)
+        Log.d("store", "2단계: main에서 store로 아이템 전달: ${selectedImage.size}")
     }
+
 
     // stroreFragment -> MainActivity
     fun deletaData(item: Document) {
@@ -39,25 +37,32 @@ class MainActivity : AppCompatActivity(), FragmentDataListner {
         setContentView(binding.root)
 
         viewPager()
+
     }
 
     // ViewPager2
     private fun viewPager() {
-        val fragmentList = ArrayList<Fragment>().apply{
-            add(SearchFragment())
-            add(StoreFragment())
+        val fragmentList = ArrayList<Fragment>().apply {
+            add(SearchFragment()) // index 0
+            add(StoreFragment()) // index 1
         }
-        binding.viewPager.adapter = ViewPagerAdapter(fragmentList, this)
-
+        Log.d("view", fragmentList[0].toString())
+        binding.viewPager.adapter = ViewPagerAdapter(this)
         // TabLayout
-        val tabTitle = listOf("이미지 검색","내 보관함")
+        val tabTitle = listOf("이미지 검색", "내 보관함")
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->  //2
             tab.text = tabTitle[position]
         }.attach()
     }
+}
 
 
 
+
+//    // fragmen tag
+//    private val TAG_SEARCH = "search_fragment"
+//    private val TAG_STORE = "store_fragment"
+//
 //    private fun initFragment() {
 //        // 초기화면
 //        setFragment(SearchFragment(),TAG_SEARCH)
@@ -112,7 +117,7 @@ class MainActivity : AppCompatActivity(), FragmentDataListner {
 //
 //    }
 
-}
+
 
 // 1) companion object 내부에 있는 것이기 때문에, 바로 호출가능한 것. 아직 직접적으로 storefragment의 생성자가 호출된 것은 아니고, newInstance 메소드 안에서 생성자 호출됨.
 // 2) 뷰페이저와 텝레이아웃 연결 후, 텝에 제목설정

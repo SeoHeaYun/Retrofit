@@ -3,6 +3,7 @@ package com.example.retrofit.UI.User_Interface
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.retrofit.Data.entity.Document
@@ -51,7 +52,6 @@ class StoreAdapter(
     }
 
     override fun getItemCount(): Int {
-        Log.d("store", "5단계: getItemCount: ${storedImage.size}")
         return storedImage.size
     }
 
@@ -59,7 +59,6 @@ class StoreAdapter(
     fun updateData(newData: MutableList<Document>) { //3)
         storedImage = newData
         notifyDataSetChanged()
-        Log.d("store", "4단계: store 어댑터 리스트 업데이트 해주기: ${storedImage.size}")
     }
 }
 

@@ -42,7 +42,7 @@ class SearchAdapter(
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         // view 재활용 될때마다 초기화(position, toggle)
-        val itemPosition = usingItem[position]
+        val itemPosition = usingItem[position] // 1)
         val clickBgr = holder.binding.clickBgr
         clickBgr.isVisible = false
 
@@ -51,7 +51,7 @@ class SearchAdapter(
             itemView.setOnClickListener {
                 onclick(itemPosition)
                 // visible toggle
-                clickBgr.isVisible = !clickBgr.isVisible
+                clickBgr.isVisible = !clickBgr.isVisible // 2)
             }
         }
 
@@ -64,7 +64,7 @@ class SearchAdapter(
     }
 
     fun updateData(newData: List<Document>) {
-        usingItem = newData
+        usingItem = newData // 3)
         notifyDataSetChanged()
         Log.d("search", "Data updated: ${usingItem.size}")
     }
@@ -73,19 +73,17 @@ class SearchAdapter(
 
 
 
+// 1) onBindViewHolder의 핵심은 변화하는 클릭이벤트가 재활용될 때마다 초기화되어야 하는 것. 그러기 위해서, 변수를 선언해, 변수에 실시간으로 새로운 정보가 담기도록 만들어 주어야 한다.
 
-/*by lazy를 사용하였기 때문에, 어댑터가 처음 사용될 때만 초기화 됨.
-즉, 비록 검색버튼을 눌러서 usingItem 변수가 초기화되었다 하더라도, 계속 searchAdpater는 계속의 기존의 인스턴스를 사용하기 때문에 직접 데이터 변경사항을 리싸이클러뷰에 알리는 코드가 필요.
-(자동으로 되는 것은 없다.)
-이때, 어댑터는 리싸이클러뷰 내부 데이터 관리와 관련된 '책임'을 담당해야 하므로, 데이터 업데이트 로직은 어댑터 내부에 배치하는 것이 좋음.
- */
+// 2) isVisible 코드의 경우, 속성값을 변경하는 것이 아니라, 속성 값 자체를 표현하는 표현식이기 때문에, true,false로 값을 넣어줘야 한다.
+//clickBgr.isVisible = !clickBgr.isVisible : 가시성 토글(두 가지 옵션 사이의 전환) -> 한항이 true(false)이면 다른 항은 false(true)가 된다.
 
-/*
-isVisible 코드의 경우, 속성값을 변경하는 것이 아니라, 속성 값 자체를 표현하는 표현식이기 때문에, true,false로 값을 넣어줘야 한다.
-clickBgr.isVisible = !clickBgr.isVisible : 가시성 토글(두 가지 옵션 사이의 전환) -> 한항이 true(false)이면 다른 항은 false(true)가 된다.ㅣ
- */
+// 3) *by lazy를 사용하였기 때문에, 어댑터가 처음 사용될 때만 초기화 됨.
+// 즉, 비록 검색버튼을 눌러서 usingItem 변수가 초기화되었다 하더라도, 계속 searchAdpater는 계속의 기존의 인스턴스를 사용하기 때문에 직접 데이터 변경사항을 리싸이클러뷰에 알리는 코드가 필요.
+// (자동으로 되는 것은 없다.)
+// 이때, 어댑터는 리싸이클러뷰 내부 데이터 관리와 관련된 '책임'을 담당해야 하므로, 데이터 업데이트 로직은 어댑터 내부에 배치하는 것이 좋음.
 
 
-/*
-onBindViewHolder의 핵심은 변화하는 클릭이벤트가 재활용될 때마다 초기화되어야 하는 것. 그러기 위해서, 변수를 선언해, 변수에 실시간으로 새로운 정보가 담기도록 만들어 주어야 한다.
- */
+
+
+
