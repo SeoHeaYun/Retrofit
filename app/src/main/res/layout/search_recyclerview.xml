@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+
+    <View
+        android:id="@+id/click_bgr"
+        android:layout_width="155dp"
+        android:layout_height="136dp"
+        android:background="#FF5722"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_image"
+        app:layout_constraintEnd_toEndOf="@id/iv_image"
+        app:layout_constraintStart_toStartOf="@id/iv_image"
+        app:layout_constraintTop_toTopOf="@id/iv_image"/>
+
+    <ImageView
+        android:id="@+id/iv_image"
+        android:layout_width="150dp"
+        android:layout_height="130dp"
+        android:layout_marginStart="30dp"
+        android:scaleType="fitXY"
+        android:layout_marginTop="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/travel" />
+
+
+
+    <TextView
+        android:id="@+id/tv_site"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Daum 카페"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/iv_image"
+        app:layout_constraintTop_toBottomOf="@+id/iv_image"
+       />
+
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="yyyy-MM-dd HH:mm:ss"
+        android:textSize="10dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_site"
+        app:layout_constraintStart_toStartOf="@id/tv_site"
+
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>
